@@ -211,7 +211,7 @@ object-detection-camera/
 - Telegram: @gfyly
 
 ## Демонстрация
-[![Демонстрация работы системы](https://youtu.be/X2wapBE3Cos)](https://youtu.be/X2wapBE3Cos)
+YouTube: [![Демонстрация работы системы](https://youtu.be/X2wapBE3Cos)](https://youtu.be/X2wapBE3Cos)
 
 В этом видео показаны основные возможности системы:
 - Подключение IP-камер и RTSP потоков
