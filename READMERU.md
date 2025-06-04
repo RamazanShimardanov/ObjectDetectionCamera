@@ -145,7 +145,7 @@ object-detection-camera/
 
 ## Запуск
 1. **Проверьте настройки**:
-   - Verify `config/config.py` contains:
+   - Проверте конфигурацию `config/config.py` :
      ```python
      SERVER_PORT = 5000
      BOT_SERVER_URL = "http://127.0.0.1:5001"
@@ -156,13 +156,13 @@ object-detection-camera/
    ```bash
    python server.py
    ```
-   The server will start at `http://127.0.0.1:5000`.
+   Сервер запустится на `http://127.0.0.1:5000`.
 
 3. **Запустите Telegram-бота**:
    ```bash
    python telegram_bot.py
    ```
-   The bot will start and connect to Telegram.
+   
 
 4. **Запустите клиент**:
    ```bash
