@@ -1,0 +1,20 @@
+Kirchhoff Institute for Physics, Germany
+http://pendelcam.kip.uni-heidelberg.de/mjpg/video.mjpg
+
+Purdue Engineering Mall, USA
+http://webcam01.ecn.purdue.edu/mjpg/video.mjpg
+
+Tokyo, Japan
+http://61.211.241.239/nphMotionJpeg?Resolution=320x240&Quality=Standard
+
+Richtung West, Switzerland
+http://clausenrc5.viewnetcam.com:50003/nphMotionJpeg?Resolution=320x240
+
+Soltorget Pajala, Sweden
+http://195.196.36.242/mjpg/video.mjpg
+
+Mohouli Park, Hilo, Hawaii
+http://67.53.46.161:65123/mjpg/video.mjpg
+
+Warrenton, OR, USA
+http://47.51.131.147/-wvhttp-01-/GetOneShot?image_size=1280x720&frame_count=1000000000

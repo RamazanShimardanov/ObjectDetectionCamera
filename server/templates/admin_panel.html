@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Панель администратора</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        .user-card {
+            background-color: white;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .user-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .user-info {
+            margin-bottom: 1rem;
+        }
+        .camera-list {
+            margin-left: 1rem;
+        }
+        .button {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .delete-btn {
+            background-color: #dc3545;
+            color: white;
+        }
+        .delete-btn:hover {
+            background-color: #c82333;
+        }
+        .logout-btn {
+            background-color: #6c757d;
+            color: white;
+        }
+        .logout-btn:hover {
+            background-color: #5a6268;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Панель администратора</h1>
+            <form action="{{ url_for('admin_logout') }}" method="POST" style="display: inline;">
+                <button type="submit" class="button logout-btn">Выйти</button>
+            </form>
+        </div>
+
+        {% for username, user in users.items() %}
+        <div class="user-card">
+            <div class="user-header">
+                <h2>{{ username }}</h2>
+                {% if user.role != 'admin' %}
+                <form action="{{ url_for('delete_user', username=username) }}" method="POST" style="display: inline;">
+                    <button type="submit" class="button delete-btn">Удалить пользователя</button>
+                </form>
+                {% endif %}
+            </div>
+            <div class="user-info">
+                <p><strong>Роль:</strong> {{ user.role }}</p>
+                <p><strong>Камеры:</strong></p>
+                <div class="camera-list">
+                    {% if user.cameras %}
+                        {% for camera_name, url in user.cameras.items() %}
+                        <p>{{ camera_name }}: {{ url }}</p>
+                        {% endfor %}
+                    {% else %}
+                        <p>Нет добавленных камер</p>
+                    {% endif %}
+                </div>
+                <p><strong>Настройки обнаружения:</strong></p>
+                <div class="camera-list">
+                    {% if user.detection_settings %}
+                        {% for class_id, settings in user.detection_settings.items() %}
+                        <p>Класс {{ class_id }}: Обнаружение {{ "включено" if settings.detect else "выключено" }}, 
+                           Уведомления {{ "включены" if settings.notify else "выключены" }}</p>
+                        {% endfor %}
+                    {% else %}
+                        <p>Нет настроек обнаружения</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <script>
+        // Подтверждение удаления пользователя
+        document.querySelectorAll('.delete-btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                if (!confirm('Вы уверены, что хотите удалить этого пользователя?')) {
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Панель администратора</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f0f0f0; }
+        h1 { text-align: center; }
+        .user-list { max-width: 1000px; margin: 0 auto; }
+        .user-card { background: white; padding: 15px; margin: 10px 0; border-radius: 8px; box-shadow: 0 0 5px rgba(0,0,0,0.1); }
+        .user-card h3 { margin: 0 0 10px; }
+        .camera-list { margin-left: 20px; }
+        .delete-btn { background-color: #ff4444; color: white; padding: 5px 10px; border: none; border-radius: 4px; cursor: pointer; }
+        .delete-btn:hover { background-color: #cc0000; }
+        .logout-btn { background-color: #4CAF50; color: white; padding: 10px; border: none; border-radius: 4px; cursor: pointer; display: block; margin: 20px auto; }
+        .logout-btn:hover { background-color: #45a049; }
+    </style>
+</head>
+<body>
+    <h1>Панель администратора</h1>
+    <div class="user-list">
+        {% for username, user_data in users.items() %}
+        <div class="user-card">
+            <h3>Пользователь: {{ username }}</h3>
+            <p>Роль: {{ user_data.role }}</p>
+            <h4>Камеры:</h4>
+            <ul class="camera-list">
+                {% for camera_name, camera_url in user_data.cameras.items() %}
+                <li>{{ camera_name }}: {{ camera_url }}</li>
+                {% else %}
+                <li>Камеры отсутствуют</li>
+                {% endfor %}
+            </ul>
+            <button class="delete-btn" onclick="deleteUser('{{ username }}')">Удалить пользователя</button>
+        </div>
+        {% endfor %}
+    </div>
+    <button class="logout-btn" onclick="logout()">Выйти</button>
+
+    <script>
+        function deleteUser(username) {
+            if (confirm(`Вы уверены, что хотите удалить пользователя ${username}?`)) {
+                fetch(`/admin/user/${username}/delete`, {
+                    method: 'POST',
+                    credentials: 'include'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        alert('Пользователь успешно удален');
+                        window.location.reload();
+                    } else {
+                        alert(data.error);
+                    }
+                })
+                .catch(error => alert('Ошибка: ' + error));
+            }
+        }
+
+        function logout() {
+            fetch('/admin/logout', {
+                method: 'POST',
+                credentials: 'include'
+            })
+            .then(() => {
+                window.location.href = '/admin/login';
+            });
+        }
+    </script>
+</body>
+</html>

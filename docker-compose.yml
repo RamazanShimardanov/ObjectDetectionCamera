@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  server:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./server/static/captures:/app/server/static/captures
+      - ./server/users.json:/app/server/users.json
+    environment:
+      - PYTHONPATH=/app
+    command: python run_server.py
+    restart: unless-stopped
+
+  bot:
+    build: .
+    ports:
+      - "5001:5001"
+    depends_on:
+      - server
+    environment:
+      - PYTHONPATH=/app
+    command: python bot/bot.py
+    restart: unless-stopped
+
+volumes:
+  captures: 
