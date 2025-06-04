@@ -217,7 +217,7 @@ I will be glad to support and work together 💖:
 - GitHub Issues: [github.com/your-username/object-detection-camera/issues](https://github.com/your-username/object-detection-camera/issues)
 
 ## Demo
-[![System Demo](https://youtu.be/X2wapBE3Cos)](https://youtu.be/X2wapBE3Cos)
+YouTube: [![System Demo](https://youtu.be/X2wapBE3Cos)](https://youtu.be/X2wapBE3Cos)
 
 This video demonstrates the key features of the system:
 - Connecting IP cameras and RTSP streams
