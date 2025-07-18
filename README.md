@@ -1,5 +1,6 @@
 # Object Detection Camera System
 
+Документация на русском [ReadMeRU.md](./READMERU.md)
 A comprehensive video surveillance system with real-time object detection using YOLOv8, a user-friendly GUI built with CustomTkinter, and Telegram notifications for detected objects.
 
 ## Table of Contents
